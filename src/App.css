@@ -245,3 +245,105 @@ h1 {
     font-size: 1rem;
   }
 }
+
+.flavor-text {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  color: #444;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.base-stats {
+  margin: 1.5rem 0 1rem 0;
+  width: 100%;
+}
+.base-stats h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.stats-table td {
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+.stat-bar-bg {
+  background: #e0e0e0;
+  border-radius: 8px;
+  width: 100px;
+  height: 10px;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.stat-bar {
+  background: linear-gradient(90deg, #4a90e2, #50e3c2);
+  height: 10px;
+  border-radius: 8px;
+}
+
+.evolution-chain {
+  margin: 1.5rem 0 1rem 0;
+  width: 100%;
+}
+.evolution-chain h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+.evo-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.evo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.evo-sprite {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  margin-right: 0.3rem;
+}
+.evo-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+.evo-arrow {
+  font-size: 1.5rem;
+  color: #888;
+  margin: 0 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .flavor-text {
+    font-size: 1rem;
+    padding: 0.6rem 0.7rem;
+  }
+  .base-stats h3, .evolution-chain h3 {
+    font-size: 1rem;
+  }
+  .evo-sprite {
+    width: 36px;
+    height: 36px;
+  }
+  .evo-name {
+    font-size: 0.9rem;
+  }
+  .evo-arrow {
+    font-size: 1.1rem;
+  }
+}
