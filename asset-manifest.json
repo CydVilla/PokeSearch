@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/PokeSearch/static/css/main.39651dd0.chunk.css",
-    "main.js": "/PokeSearch/static/js/main.56a30881.chunk.js",
-    "main.js.map": "/PokeSearch/static/js/main.56a30881.chunk.js.map",
+    "main.css": "/PokeSearch/static/css/main.1bf37d76.chunk.css",
+    "main.js": "/PokeSearch/static/js/main.2446c87a.chunk.js",
+    "main.js.map": "/PokeSearch/static/js/main.2446c87a.chunk.js.map",
     "runtime-main.js": "/PokeSearch/static/js/runtime-main.96b08996.js",
     "runtime-main.js.map": "/PokeSearch/static/js/runtime-main.96b08996.js.map",
-    "static/js/2.29c8b407.chunk.js": "/PokeSearch/static/js/2.29c8b407.chunk.js",
-    "static/js/2.29c8b407.chunk.js.map": "/PokeSearch/static/js/2.29c8b407.chunk.js.map",
+    "static/js/2.d756fa0e.chunk.js": "/PokeSearch/static/js/2.d756fa0e.chunk.js",
+    "static/js/2.d756fa0e.chunk.js.map": "/PokeSearch/static/js/2.d756fa0e.chunk.js.map",
     "index.html": "/PokeSearch/index.html",
-    "static/css/main.39651dd0.chunk.css.map": "/PokeSearch/static/css/main.39651dd0.chunk.css.map",
-    "static/js/2.29c8b407.chunk.js.LICENSE.txt": "/PokeSearch/static/js/2.29c8b407.chunk.js.LICENSE.txt"
+    "static/css/main.1bf37d76.chunk.css.map": "/PokeSearch/static/css/main.1bf37d76.chunk.css.map",
+    "static/js/2.d756fa0e.chunk.js.LICENSE.txt": "/PokeSearch/static/js/2.d756fa0e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.96b08996.js",
-    "static/js/2.29c8b407.chunk.js",
-    "static/css/main.39651dd0.chunk.css",
-    "static/js/main.56a30881.chunk.js"
+    "static/js/2.d756fa0e.chunk.js",
+    "static/css/main.1bf37d76.chunk.css",
+    "static/js/main.2446c87a.chunk.js"
   ]
 }
