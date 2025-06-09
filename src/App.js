@@ -12,6 +12,9 @@ const App = () => {
   const [flavorText, setFlavorText] = useState("");
   const [baseStats, setBaseStats] = useState([]);
   const [evolutionChain, setEvolutionChain] = useState([]);
+  const [showShiny, setShowShiny] = useState(false);
+  const [typeRelations, setTypeRelations] = useState({ weak: [], resist: [], immune: [] });
+  const [moveList, setMoveList] = useState([]);
 
   const fetchSuggestions = useCallback(async () => {
     try {
@@ -55,6 +58,9 @@ const App = () => {
     setFlavorText("");
     setBaseStats([]);
     setEvolutionChain([]);
+    setShowShiny(false);
+    setTypeRelations({ weak: [], resist: [], immune: [] });
+    setMoveList([]);
     const toArray = [];
     try {
       // Fetch main Pokémon data
@@ -99,6 +105,40 @@ const App = () => {
         })
       );
       setEvolutionChain(evoChainWithSprites);
+
+      // Type weaknesses/resistances
+      const typeUrls = res.data.types.map(t => t.type.url);
+      const typeData = await Promise.all(typeUrls.map(url => axios.get(url)));
+      // Collect all relations
+      let doubleDamageFrom = [];
+      let halfDamageFrom = [];
+      let noDamageFrom = [];
+      typeData.forEach(td => {
+        doubleDamageFrom = doubleDamageFrom.concat(td.data.damage_relations.double_damage_from.map(t => t.name));
+        halfDamageFrom = halfDamageFrom.concat(td.data.damage_relations.half_damage_from.map(t => t.name));
+        noDamageFrom = noDamageFrom.concat(td.data.damage_relations.no_damage_from.map(t => t.name));
+      });
+      // Remove duplicates and handle overlaps
+      let weak = doubleDamageFrom.filter(t => !noDamageFrom.includes(t));
+      let resist = halfDamageFrom.filter(t => !noDamageFrom.includes(t) && !doubleDamageFrom.includes(t));
+      let immune = [...new Set(noDamageFrom)];
+      weak = [...new Set(weak)];
+      resist = [...new Set(resist)];
+      setTypeRelations({ weak, resist, immune });
+
+      // Move list: first 5 level-up moves
+      const levelUpMoves = res.data.moves
+        .filter(m => m.version_group_details.some(vgd => vgd.move_learn_method.name === "level-up"))
+        .map(m => {
+          const vgd = m.version_group_details.find(vgd => vgd.move_learn_method.name === "level-up");
+          return {
+            name: m.move.name,
+            level: vgd ? vgd.level_learned_at : 0
+          };
+        })
+        .sort((a, b) => a.level - b.level)
+        .slice(0, 5);
+      setMoveList(levelUpMoves);
     } catch (e) {
       setError("Pokemon not found! Try another name.");
       setPokemonData([]);
@@ -145,11 +185,14 @@ const App = () => {
           </div>
           <div className="pokemon-image">
             <img 
-              src={data.sprites["front_default"]} 
+              src={showShiny ? data.sprites["front_shiny"] : data.sprites["front_default"]} 
               alt={data.name}
-              onMouseOver={e => e.target.src = data.sprites["back_default"]}
-              onMouseOut={e => e.target.src = data.sprites["front_default"]}
+              onMouseOver={e => e.target.src = showShiny ? data.sprites["back_shiny"] : data.sprites["back_default"]}
+              onMouseOut={e => e.target.src = showShiny ? data.sprites["front_shiny"] : data.sprites["front_default"]}
             />
+            <button className="shiny-toggle" onClick={() => setShowShiny(s => !s)}>
+              {showShiny ? "Show Normal" : "Show Shiny"}
+            </button>
           </div>
           <div className="types">
             {data.types.map((type, index) => (
@@ -157,6 +200,16 @@ const App = () => {
                 {type.type.name}
               </span>
             ))}
+          </div>
+
+          {/* Type Weaknesses/Resistances */}
+          <div className="type-relations">
+            <h3>Type Matchups</h3>
+            <div className="type-relations-list">
+              <span><strong>Weak to:</strong> {typeRelations.weak.length ? typeRelations.weak.join(", ") : "None"}</span><br/>
+              <span><strong>Resistant to:</strong> {typeRelations.resist.length ? typeRelations.resist.join(", ") : "None"}</span><br/>
+              <span><strong>Immune to:</strong> {typeRelations.immune.length ? typeRelations.immune.join(", ") : "None"}</span>
+            </div>
           </div>
 
           {/* Pokédex Entry */}
@@ -201,6 +254,21 @@ const App = () => {
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Move List */}
+          {moveList.length > 0 && (
+            <div className="move-list">
+              <h3>Notable Moves (Level-up)</h3>
+              <ul>
+                {moveList.map((move, idx) => (
+                  <li key={move.name}>
+                    <span className="move-name">{move.name.replace("-", " ")}</span>
+                    {move.level > 0 && <span className="move-level"> (Lv. {move.level})</span>}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

@@ -347,3 +347,87 @@ h1 {
     font-size: 1.1rem;
   }
 }
+
+.shiny-toggle {
+  margin-top: 0.5rem;
+  background: linear-gradient(90deg, #fbc531, #00b894);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+.shiny-toggle:hover {
+  background: linear-gradient(90deg, #00b894, #fbc531);
+  color: #222;
+}
+
+.type-relations {
+  margin: 1.2rem 0 0.5rem 0;
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  text-align: left;
+}
+.type-relations h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.05rem;
+  color: #2c3e50;
+}
+.type-relations-list span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #444;
+  font-size: 0.98rem;
+}
+
+.move-list {
+  margin: 1.2rem 0 0.5rem 0;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  text-align: left;
+}
+.move-list h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.05rem;
+  color: #2c3e50;
+}
+.move-list ul {
+  list-style: disc inside;
+  margin: 0;
+  padding: 0 0 0 1rem;
+}
+.move-list li {
+  margin-bottom: 0.2rem;
+  color: #444;
+  font-size: 0.98rem;
+}
+.move-name {
+  font-weight: 600;
+  color: #0984e3;
+}
+.move-level {
+  color: #636e72;
+  font-size: 0.95em;
+}
+
+@media (max-width: 600px) {
+  .shiny-toggle {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
+  }
+  .type-relations, .move-list {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.6rem;
+  }
+  .type-relations-list span, .move-list li {
+    font-size: 0.93rem;
+  }
+}
