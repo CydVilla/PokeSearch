@@ -7,6 +7,12 @@ A modern, mobile-friendly Pokémon search application that allows users to look 
 ## Features
 
 - 🔍 Real-time Pokémon search with autocomplete suggestions
+- 🃏 **NEW: Pokémon Card Scanner** - Scan physical cards to get pricing information
+  - Upload card images from your device
+  - Use your camera to capture cards in real-time
+  - Get market pricing from multiple sources (TCGPlayer, eBay, Card Market)
+  - View trending value and price history
+  - AI-powered card recognition (demo mode with mock data)
 - 📱 Fully responsive design for mobile and desktop
 - 🎨 Beautiful UI with smooth animations and transitions
 - 📊 Detailed Pokémon information including:
@@ -68,6 +74,31 @@ This will build the project and deploy it to the `gh-pages` branch, making it av
 - Axios for API requests
 - CSS3 with modern features
 - GitHub Pages for hosting
+- Media Devices API for camera access
+- FileReader API for image upload
+
+## Card Scanner Feature
+
+The Pokémon Card Scanner allows you to:
+
+1. **Upload a photo** of your Pokémon card from your device
+2. **Use your camera** to capture a card image in real-time
+3. **Scan the card** to identify it and get pricing information
+4. **View pricing data** from multiple marketplaces:
+   - Market price (average)
+   - Low, mid, and high price ranges
+   - Individual prices from TCGPlayer, eBay, and Card Market
+   - 30-day price trend indicator
+
+### Implementation Notes
+
+The current implementation uses **mock data for demonstration purposes**. In a production environment, this feature would integrate with:
+
+- **AI Image Recognition Services** (e.g., Google Vision API, AWS Rekognition) to identify card details from the image
+- **Card Pricing APIs** (e.g., TCGPlayer API, eBay API, PokemonPrices.com) to fetch real-time market prices
+- **Card Database APIs** to match identified cards with accurate set information and rarity
+
+This provides a proof-of-concept for the card scanning and pricing lookup workflow.
 
 ## Contributing
 

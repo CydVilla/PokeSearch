@@ -1,6 +1,32 @@
 import React, { useState, useRef } from "react";
 import "./CardScanner.css";
 
+// Simulation delay for card scanning (in milliseconds)
+const SCAN_SIMULATION_DELAY = 2000;
+
+// Mock card data for demonstration
+// In production, this would be replaced with actual AI recognition and pricing API calls
+const MOCK_CARD_DATA = {
+  name: "Charizard VMAX",
+  set: "Darkness Ablaze",
+  number: "020/189",
+  rarity: "Secret Rare",
+  condition: "Near Mint",
+  prices: {
+    market: 145.99,
+    low: 98.50,
+    mid: 145.99,
+    high: 225.00
+  },
+  trend: "+12.5%",
+  lastUpdated: new Date().toLocaleDateString(),
+  sources: [
+    { name: "TCGPlayer", price: 145.99 },
+    { name: "eBay Average", price: 152.30 },
+    { name: "Card Market", price: 138.50 }
+  ]
+};
+
 const CardScanner = ({ onClose }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -38,7 +64,7 @@ const CardScanner = ({ onClose }) => {
         setError("");
       }
     } catch (err) {
-      setError("Could not access camera. Please check permissions or use file upload.");
+      setError("Could not access camera. Please enable camera permissions in your browser settings and try again.");
       console.error("Camera error:", err);
     }
   };
@@ -59,7 +85,8 @@ const CardScanner = ({ onClose }) => {
       canvas.height = videoRef.current.videoHeight;
       const ctx = canvas.getContext("2d");
       ctx.drawImage(videoRef.current, 0, 0);
-      const imageData = canvas.toDataURL("image/jpeg");
+      // Use 0.8 quality for good balance between file size and card recognition accuracy
+      const imageData = canvas.toDataURL("image/jpeg", 0.8);
       setImagePreview(imageData);
       setSelectedImage(imageData);
       stopCamera();
@@ -79,33 +106,12 @@ const CardScanner = ({ onClose }) => {
     setCardData(null);
 
     // Simulate AI processing delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, SCAN_SIMULATION_DELAY));
 
     // Mock AI card recognition and pricing lookup
     // In a real implementation, this would call an AI service (e.g., Google Vision API)
     // to identify the card, then call pricing APIs (e.g., TCGPlayer, eBay)
-    const mockCardData = {
-      name: "Charizard VMAX",
-      set: "Darkness Ablaze",
-      number: "020/189",
-      rarity: "Secret Rare",
-      condition: "Near Mint",
-      prices: {
-        market: 145.99,
-        low: 98.50,
-        mid: 145.99,
-        high: 225.00
-      },
-      trend: "+12.5%",
-      lastUpdated: new Date().toLocaleDateString(),
-      sources: [
-        { name: "TCGPlayer", price: 145.99 },
-        { name: "eBay Average", price: 152.30 },
-        { name: "Card Market", price: 138.50 }
-      ]
-    };
-
-    setCardData(mockCardData);
+    setCardData(MOCK_CARD_DATA);
     setScanning(false);
   };
 
