@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import axios from "axios";
+import CardScanner from "./CardScanner";
 
 const App = () => {
   const [pokemon, setPokemon] = useState("");
@@ -15,6 +16,7 @@ const App = () => {
   const [showShiny, setShowShiny] = useState(false);
   const [typeRelations, setTypeRelations] = useState({ weak: [], resist: [], immune: [] });
   const [moveList, setMoveList] = useState([]);
+  const [showCardScanner, setShowCardScanner] = useState(false);
 
   const fetchSuggestions = useCallback(async () => {
     try {
@@ -150,6 +152,16 @@ const App = () => {
   return (
     <div className="App">
       <h1>PokéSearch</h1>
+      
+      <div className="feature-buttons">
+        <button 
+          className="feature-button card-scanner-button" 
+          onClick={() => setShowCardScanner(true)}
+        >
+          🃏 Scan Pokémon Card
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div className="search-container">
           <input
@@ -298,6 +310,10 @@ const App = () => {
           </div>
         </div>
       ))}
+
+      {showCardScanner && (
+        <CardScanner onClose={() => setShowCardScanner(false)} />
+      )}
     </div>
   );
 };
